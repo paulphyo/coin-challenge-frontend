@@ -1,4 +1,4 @@
-import { CoinCalculatorPage } from "./coin-calculator/pages/CoinCalculatorPage";
+import { CoinCalculatorPage } from "./feature/coin-calculator/pages/CoinCalculatorPage";
 
 const App = () => {
   return (
