@@ -1,4 +1,4 @@
-export interface CoinChangePayload {
+export interface CoinRequest {
   targetAmount: number;
   coinDenominations: number[];
 }

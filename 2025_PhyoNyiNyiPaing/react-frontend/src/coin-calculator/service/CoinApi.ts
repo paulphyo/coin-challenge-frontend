@@ -1,0 +1,12 @@
+import axios from "axios";
+import type { CoinRequest } from "../types/CoinRequest";
+
+const API_URL = "http://localhost:8080";
+
+const CoinAPI = {
+    async getMinimumCoins(payload: CoinRequest) {
+        const response = await axios.post(API_URL + "/coins/min", payload);
+        return response.data;
+    }
+}
+export default CoinAPI;
