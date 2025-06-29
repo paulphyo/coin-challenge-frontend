@@ -10,8 +10,8 @@ export const GenerateButton = ({ loading, onCalculate, hasStarted }: GenerateBut
     <div className="w-full max-w-md flex flex-col items-center p-6 mb-20">
         {!hasStarted && (
             <>
-                <img src="images/steppers/stepper-3.png" alt="Step 3" />
-                <p className="text-gray-600 mb-4">Click Generate!</p>
+                <img src="images/steppers/stepper-3.png" width={40} alt="Step 3" />
+                <p className="text-gray-600 mb-10 mt-5 text-lg font-semibold">Click Generate!</p>
             </>
         )}
 

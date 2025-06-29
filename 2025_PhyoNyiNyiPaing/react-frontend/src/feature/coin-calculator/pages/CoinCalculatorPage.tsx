@@ -77,8 +77,8 @@ export const CoinCalculatorPage = () => {
         <>
             <p className="text-right mr-20 mt-10 font-light uppercase">Phyo</p>
             <div className="w-full flex flex-col items-center min-h-screen justify-around">
-                <div ref={titleRef} className="title">
-                    <h1 className="text-4xl font-extrabold text-gray-800 mb-6 text-center mt-25">
+                <div ref={titleRef} className="title mb-15">
+                    <h1 className="text-5xl font-extrabold text-gray-800 mb-6 text-center mt-25">
                         CashSplitter
                     </h1>
                     <p className="subheading text-center font-light text-sm">
@@ -88,7 +88,7 @@ export const CoinCalculatorPage = () => {
 
                 <section
                     ref={cashInputRef}
-                    className="cash-input-section flex flex-col md:flex-row items-center m-auto mt-20 gap-20 mb-10"
+                    className="cash-input-section flex flex-col md:flex-row mt-20 w-full justify-evenly mb-20"
                 >
                     <CashAmountInput
                         targetAmount={targetAmount}
