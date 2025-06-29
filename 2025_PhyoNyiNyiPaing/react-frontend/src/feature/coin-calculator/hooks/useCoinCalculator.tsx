@@ -37,9 +37,21 @@ export const useCoinCalculator = () => {
 
     const extractErrorMessage = useCallback((err: unknown): string => {
         if (err instanceof AxiosError) {
-            return err.response?.data?.message ||
-                `Request failed with status ${err.response?.status}` ||
-                "Network error occurred";
+            const data = err.response?.data;
+
+            // Handle array of validation errors
+            if (Array.isArray(data?.errors)) {
+                return data.errors.join(", ");
+            }
+
+            // Handle single message error
+            if (typeof data?.message === "string") {
+                return data.message;
+            }
+            console.log("hi");
+
+            // Fallback for status error
+            return `Request failed with status ${err.response?.status}`;
         }
 
         if (err instanceof Error) {
@@ -48,6 +60,7 @@ export const useCoinCalculator = () => {
 
         return "An unexpected error occurred";
     }, []);
+
 
     const handleCalculate = useCallback(async () => {
         updateState({ error: "", result: null, loading: true });
