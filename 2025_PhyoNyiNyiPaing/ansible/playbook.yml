@@ -2,10 +2,10 @@
   become: yes
   tasks:
     - name: Pull Docker image from Docker Hub
-      shell: docker pull {{ docker_username }}/coin-challenge-backend:latest
+      shell: docker pull {{ docker_username }}/coin-react-frontend:latest
 
     - name: Stop and remove existing container
-      shell: docker rm -f backend || true
+      shell: docker rm -f frontend || true
 
     - name: Run the new container
-      shell: docker run -d --name backend -p 8080:8080 {{ docker_username }}/coin-challenge-backend:latest
+      shell: docker run -d --name frontend -p 80:80 {{ docker_username }}/coin-react-frontend:latest
