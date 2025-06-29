@@ -1,0 +1,20 @@
+# Ignore any node_modules folder anywhere
+**/node_modules
+
+# Ignore any dist folder inside react-front (or anywhere if you want)
+**/react-front/dist
+
+# Ignore git files anywhere
+**/.git
+**/.gitignore
+
+# Ignore logs and temp files anywhere
+**/*.log
+**/*.tmp
+**/*.temp
+
+# Ignore local env files anywhere
+**/.env
+**/.env.local
+**/.env.*.local
+
