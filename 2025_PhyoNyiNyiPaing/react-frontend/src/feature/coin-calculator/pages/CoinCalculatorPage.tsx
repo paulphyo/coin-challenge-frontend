@@ -75,7 +75,17 @@ export const CoinCalculatorPage = () => {
 
     return (
         <>
-            <p className="text-right mr-20 mt-10 font-light uppercase">Phyo</p>
+            <div className="flex">
+                <a
+                    href="https://github.com/paulphyo"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="ml-auto mr-20 mt-10 font-light uppercase"
+                >
+                    Phyo
+                </a>
+            </div>
+
             <div className="w-full flex flex-col items-center min-h-screen justify-around">
                 <div ref={titleRef} className="title mb-15">
                     <h1 className="text-5xl font-extrabold text-gray-800 mb-6 text-center mt-25">
