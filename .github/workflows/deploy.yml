@@ -1,0 +1,54 @@
+name: Frontend CI/CD Deployment
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  PROJECT_DIR: 2025_PhyoNyiNyiPaing
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: ${{ env.PROJECT_DIR }}
+          file: ${{ env.PROJECT_DIR }}/Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/coin-react-frontend:latest
+
+      - name: Write private key to file
+        run: |
+          echo "${{ secrets.EC2_SSH_KEY }}" > key.pem
+          chmod 400 key.pem
+
+      - name: Add EC2 host to known_hosts
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts
+
+      - name: Install Ansible
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ansible
+
+      - name: Run Ansible to deploy frontend container
+        run: |
+          ansible-playbook ${{ env.PROJECT_DIR }}/ansible/playbook.yml \
+            -i "${{ secrets.EC2_HOST }}," \
+            --private-key key.pem \
+            -u ${{ secrets.EC2_USER }} \
+            -e "docker_username=${{ secrets.DOCKERHUB_USERNAME }}"
